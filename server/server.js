@@ -10,7 +10,7 @@ app.use(express.static(publicPath)); //configures to use public as an index
 app.use(bodyParser.json());
 
 
-app.listen(3000, ()=>{
+app.listen(port, ()=>{
     console.log(`Server is up on port ${port}`);
 })
 
