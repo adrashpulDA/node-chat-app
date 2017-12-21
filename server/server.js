@@ -15,18 +15,17 @@ app.use(express.static(publicPath)); //configures to use public as an index
 io.on('connection', (socket) => {
     console.log('New user connected');
 
-    socket.on('disconnect', () => {
-        console.log('Disconnected from server');
+    socket.on('createMessage', (message) => {
+        console.log(message);
+        io.emit('newMessage', {
+            from: message.from,
+            text: message.text,
+            createdAt: new Date().getTime()
+        });
     });
 
-    socket.emit('newMessage', {
-        from: 'me',
-        text: 'text',
-        createdAt: 1234
-    }); 
-
-    socket.on('createMessage', (data) => {
-        console.log(data);
+    socket.on('disconnect', () => {
+        console.log('Disconnected from server');
     });
 });
 
