@@ -15,6 +15,18 @@ app.use(express.static(publicPath)); //configures to use public as an index
 io.on('connection', (socket) => {
     console.log('New user connected');
 
+    socket.emit('newMessage', {
+        from: 'Admmin',
+        text: 'Welcome to the chat app',
+        createdAt: new Date().getTime()
+    });
+
+    socket.broadcast.emit('newMessage', {
+        from: 'Admin',
+        text: 'New user joined',
+        createdAt: new Date().getTime()
+    });
+    
     socket.on('createMessage', (message) => {
         console.log(message);
         io.emit('newMessage', {
