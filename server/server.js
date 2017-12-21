@@ -15,14 +15,22 @@ app.use(express.static(publicPath)); //configures to use public as an index
 io.on('connection', (socket) => {
     console.log('New user connected');
 
-    socket.on('disconnect', ()=>{
+    socket.on('disconnect', () => {
         console.log('Disconnected from server');
+    });
+
+    socket.emit('newMessage', {
+        from: 'me',
+        text: 'text',
+        createdAt: 1234
+    }); 
+
+    socket.on('createMessage', (data) => {
+        console.log(data);
     });
 });
 
 server.listen(port, () => {
     console.log(`Server is up on port ${port}`);
 });
-
-
 
