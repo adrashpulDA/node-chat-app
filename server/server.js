@@ -26,11 +26,6 @@ io.on('connection', (socket) => {
         }
 
         socket.join(params.room);
-        // socket.leave - removes
-
-        // io.emit
-        // socket.broadcast.emit
-        // socket.emit
 
         socket.emit(
             'newMessage',
